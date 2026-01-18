@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="text-align: center; margin-bottom: 3rem;">
+    <h1 class="accent">Support <span style="color:white;">Development</span></h1>
+    <p style="color: #94a3b8; max-width: 600px; margin: auto;">TheHub Global is an independent project. Your contributions directly fund our API costs and the transition from free-tier tools to professional satellite tracking.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+
+    <div class="glass">
+        <h3>Contribution Portal</h3>
+        <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 2rem;">Every contribution helps us maintain 24/7 uptime and expand our data endpoints.</p>
+
+        <a href="{{ paystack }}" target="_blank" style="display: block; text-align: center; background: #38bdf8; color: #020617; padding: 15px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-bottom: 15px;">Support with Naira (Paystack)</a>
+
+        <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px solid #334155;">
+            <small style="color: #64748b; display: block; margin-bottom: 5px;">Web3 / ETH Wallet</small>
+            <code style="word-break: break-all; color: var(--accent); font-size: 0.75rem;">{{ wallet }}</code>
+        </div>
+    </div>
+
+    <div class="glass" style="border-top: 3px solid var(--accent);">
+        <h3 class="accent">Growth Roadmap</h3>
+        <div style="font-size: 0.85rem; color: #94a3b8;">
+            <p><strong>Current:</strong> Free-tier API (100 daily requests)</p>
+            <div style="width: 100%; background: #1e293b; height: 8px; border-radius: 10px; margin-bottom: 15px;">
+                <div style="width: 20%; background: var(--accent); height: 100%; border-radius: 10px;"></div>
+            </div>
+
+            <p><strong>Next Goal:</strong> Pilot Tier API (₦150k/mo)</p>
+            <p style="font-size: 0.8rem;"><i>Unlocks 1,000+ aircraft updates and historical route data.</i></p>
+
+            <p style="margin-top: 15px;"><strong>Future:</strong> Live Satellite Feed Integration</p>
+            <p style="font-size: 0.8rem;"><i>Global coverage for flights over oceans and remote areas.</i></p>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 3rem; text-align: center; opacity: 0.6; font-size: 0.75rem;">
+    <p>All contributions go toward infrastructure and data licensing. Thank you for fueling the terminal.</p>
+</div>
+{% endblock %}

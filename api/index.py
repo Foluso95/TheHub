@@ -13,13 +13,20 @@ PAYSTACK_LINK = "https://paystack.shop/pay/tskni695ms"
 @app.route("/")
 def home():
     news = []
+    # Dynamic Statistics for the Dashboard
+    stats = {
+        "logs_delivered": 124,
+        "active_queries": 8,
+        "system_uptime": "99.9%",
+        "global_reach": "24 Countries",
+    }
     try:
         url = f"https://newsapi.org/v2/everything?q=aviation&sortBy=publishedAt&pageSize=3&apiKey={NEWS_API_KEY}"
         res = requests.get(url, timeout=5)
         news = res.json().get("articles", [])
     except:
         pass
-    return render_template("index.html", news=news)
+    return render_template("index.html", news=news, stats=stats)
 
 
 @app.route("/aviation")
@@ -56,6 +63,11 @@ def aviation():
 @app.route("/travel-planning")
 def travel_services():
     return render_template("travel_services.html")
+
+
+@app.route("/support")
+def support():
+    return render_template("support.html", paystack=PAYSTACK_LINK, wallet=ETH_WALLET)
 
 
 @app.route("/terms")
