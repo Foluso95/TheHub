@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-# --- CONFIGURATION ---
+# --- LIVE CONFIGURATION ---
 NEWS_API_KEY = "39bbc467ab07459396692bfbc8564151"
 AIRLABS_API_KEY = "e6f87644-fdb1-4963-a391-1d66b790ded0"
 ETH_WALLET = "0x5b2ca3bac67d28d254a16fe3341ca6a136913ed3"
@@ -28,9 +28,10 @@ def home():
 def aviation():
     flights = []
     try:
+        # Pulling 100 flights to ensure we capture local Nigerian traffic
         url = f"https://airlabs.co/api/v9/flights?api_key={AIRLABS_API_KEY}"
         res = requests.get(url, headers=HEADERS, timeout=10)
-        flights = res.json().get("response", [])[:20]
+        flights = res.json().get("response", [])[:100]
     except:
         pass
     return render_template("aviation.html", flights=flights)
