@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="text-align: center; padding: 5rem 0;">
+    <h1 style="font-size: 4.5rem; margin: 0; font-weight: 800;">Modern <span style="color:var(--accent)">Intelligence.</span></h1>
+    <p style="color: #94a3b8; font-size: 1.25rem; margin-bottom: 3rem;">Global aviation feeds meets decentralized blockchain transparency.</p>
+    <div class="glass" style="max-width: 550px; margin: auto;">
+        <h3 style="margin-top: 0; color: var(--accent);">DEVELOPMENT FUND</h3>
+        <p style="font-size: 0.85rem; color: #64748b;">Direct ETH/ERC20 Support:</p>
+        <div style="background: #020617; padding: 1.2rem; border-radius: 12px; font-family: monospace; border: 1px solid #1e293b;">{{ wallet }}</div>
+        <button onclick="navigator.clipboard.writeText('{{ wallet }}'); alert('Address Copied!')"
+                style="margin-top: 1.5rem; background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 0.7rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: bold;">
+            COPY ADDRESS
+        </button>
+    </div>
+</div>
+{% endblock %}

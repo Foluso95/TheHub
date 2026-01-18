@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="glass">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h2 style="margin:0">Live Flight Intelligence</h2>
+        <button onclick="window.print()" style="background: #fff; color: #000; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: bold; cursor: pointer;">EXPORT PDF</button>
+    </div>
+    <input type="text" id="search" onkeyup="filter()" placeholder="Filter by Flight, Airline, or City..."
+           style="width: 100%; padding: 1.2rem; border-radius: 12px; background: #020617; border: 1px solid #1e293b; color: white; margin-bottom: 2rem; box-sizing: border-box;">
+    <div style="overflow-x: auto;">
+        <table id="flights" style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tr style="color: #64748b; font-size: 0.8rem; border-bottom: 1px solid #1e293b;">
+                <th style="padding: 1rem;">IDENT</th>
+                <th>AIRLINE</th>
+                <th>ROUTE</th>
+                <th>STATUS</th>
+            </tr>
+            {% for f in flights %}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                <td style="padding: 1.2rem; font-weight: bold; color: var(--accent);">{{ f.flight.iata }}</td>
+                <td>{{ f.airline.name }}</td>
+                <td>{{ f.departure.iata }} ➔ {{ f.arrival.iata }}</td>
+                <td><span style="color: #4ade80; background: rgba(74, 222, 128, 0.1); padding: 4px 10px; border-radius: 20px; font-size: 0.7rem;">● LIVE</span></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<script>
+function filter() {
+    let val = document.getElementById("search").value.toUpperCase();
+    let rows = document.getElementById("flights").getElementsByTagName("tr");
+    for (let i = 1; i < rows.length; i++) {
+        rows[i].style.display = rows[i].innerText.toUpperCase().includes(val) ? "" : "none";
+    }
+}
+</script>
+{% endblock %}
