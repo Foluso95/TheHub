@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-# --- LIVE CONFIGURATION ---
+# --- CONFIGURATION ---
 NEWS_API_KEY = "39bbc467ab07459396692bfbc8564151"
 AIRLABS_API_KEY = "e6f87644-fdb1-4963-a391-1d66b790ded0"
 ETH_WALLET = "0x5b2ca3bac67d28d254a16fe3341ca6a136913ed3"
@@ -26,15 +26,25 @@ def home():
 
 @app.route("/aviation")
 def aviation():
-    flights = []
+    combined_data = []
     try:
-        # Pulling 100 flights to ensure we capture local Nigerian traffic
-        url = f"https://airlabs.co/api/v9/flights?api_key={AIRLABS_API_KEY}"
-        res = requests.get(url, headers=HEADERS, timeout=10)
-        flights = res.json().get("response", [])[:100]
+        # 1. Fetch Live Flights
+        live_url = f"https://airlabs.co/api/v9/flights?api_key={AIRLABS_API_KEY}"
+        live_res = requests.get(live_url, timeout=10).json().get("response", [])
+        for f in live_res:
+            f["status_type"] = "LIVE"
+            combined_data.append(f)
+
+        # 2. Fetch Schedules (to catch airlines like Dana/Lufthansa not currently in air)
+        sched_url = f"https://airlabs.co/api/v9/schedules?api_key={AIRLABS_API_KEY}"
+        sched_res = requests.get(sched_url, timeout=10).json().get("response", [])
+        for s in sched_res:
+            s["status_type"] = "SCHEDULED"
+            combined_data.append(s)
+
     except:
         pass
-    return render_template("aviation.html", flights=flights)
+    return render_template("aviation.html", flights=combined_data[:250])
 
 
 @app.route("/checkout")

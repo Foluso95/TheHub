@@ -1,36 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="glass" style="max-width: 600px; margin: 4rem auto; text-align: center;">
-    <h2 class="accent">Project Treasury</h2>
-    <p style="color: #94a3b8;">Decentralized funding for global aviation intelligence.</p>
-
-    <div style="background: #020617; padding: 1.5rem; border-radius: 12px; margin: 2rem 0; border: 1px solid var(--accent); font-family: monospace; word-break: break-all;">
-        {{ wallet }}
-    </div>
-
-    <button id="connectBtn" onclick="toggleConnect()" style="background: var(--accent); color: #020617; border: none; padding: 1rem 2rem; border-radius: 10px; font-weight: 700; width: 100%;">
-        CONNECT VISITOR WALLET
-    </button>
-    <p id="status" style="margin-top: 1rem; font-size: 0.8rem; color: #64748b;"></p>
+    <h2 class="accent">Treasury</h2>
+    <p>Official Project Address (ERC-20)</p>
+    <div style="background: #020617; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--accent); word-break: break-all; font-family: monospace; margin-bottom: 2rem;">{{ wallet }}</div>
+    <button onclick="connect()" id="wb" style="background: var(--accent); color: #020617; border: none; padding: 1rem; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer;">CONNECT WALLET</button>
 </div>
-
 <script>
-async function toggleConnect() {
-    const btn = document.getElementById('connectBtn');
-    const status = document.getElementById('status');
-
-    if (typeof window.ethereum !== 'undefined') {
-        try {
-            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-            const account = accounts[0];
-            btn.innerHTML = "WALLET CONNECTED";
-            btn.style.background = "#4ade80";
-            status.innerHTML = "Connected as: " + account.substring(0,6) + "..." + account.substring(38);
-        } catch (error) {
-            status.innerHTML = "Connection refused by user.";
-        }
-    } else {
-        alert("No Crypto Wallet detected. Please install MetaMask to use this feature.");
+async function connect() {
+    if (window.ethereum) {
+        const acc = await ethereum.request({ method: 'eth_requestAccounts' });
+        document.getElementById('wb').innerHTML = "CONNECTED: " + acc[0].substring(0,8) + "...";
     }
 }
 </script>
