@@ -1,26 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="glass">
-    <h2 style="margin-bottom: 2rem;">AirLabs <span class="accent">Live Feed</span></h2>
-    <table style="width: 100%; border-collapse: collapse; text-align: left;">
-        <thead style="color: #64748b; font-size: 0.75rem; text-transform: uppercase;">
-            <tr style="border-bottom: 1px solid #1e293b;">
-                <th style="padding: 1rem 0;">Flight</th>
-                <th>Airline</th>
-                <th>Alt (ft)</th>
-                <th>Speed (km/h)</th>
-            </tr>
-        </thead>
-        <tbody>
+    <h2>Live <span class="accent">Flight Board</span></h2>
+    <input type="text" id="flightSearch" placeholder="Search flights..." style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #1e293b; background: #020617; color: white;">
+    <table style="width: 100%; text-align: left;">
+        <thead style="color: #64748b;"><tr><th>FLIGHT</th><th>AIRLINE</th><th>ACTION</th></tr></thead>
+        <tbody id="flightTable">
             {% for f in flights %}
-            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <td style="padding: 1rem 0; color: var(--accent); font-weight: 700;">{{ f.flight_iata or f.flight_icao }}</td>
-                <td>{{ f.airline_iata or 'N/A' }}</td>
-                <td>{{ f.alt }}</td>
-                <td>{{ f.speed }}</td>
+            <tr style="border-bottom: 1px solid #1e293b;">
+                <td style="padding: 1rem 0; font-weight: bold;">{{ f.flight_iata }}</td>
+                <td>{{ f.airline_iata }}</td>
+                <td><a href="/checkout" style="background: var(--accent); color: black; padding: 5px 10px; border-radius: 4px; text-decoration: none; font-weight: bold;">BUY DATA</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+<script>
+document.getElementById('flightSearch').addEventListener('keyup', function() {
+    let filter = this.value.toUpperCase();
+    let rows = document.querySelectorAll('#flightTable tr');
+    rows.forEach(row => { row.style.display = row.innerText.toUpperCase().includes(filter) ? "" : "none"; });
+});
+</script>
 {% endblock %}

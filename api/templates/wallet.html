@@ -1,23 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="glass" style="max-width: 700px; margin: auto;">
-    <h2 style="color: var(--accent); margin-top: 0;">Blockchain Interface</h2>
-    <div style="background: #020617; padding: 1.5rem; border-radius: 12px; margin: 2rem 0; border: 1px solid #1e293b;">
-        <small style="color: #64748b; display: block; margin-bottom: 0.5rem;">CONNECTED ACCOUNT</small>
-        <div id="addrDisplay" style="color: #4ade80; font-family: monospace;">Not Connected. Use Navigation Bar.</div>
-    </div>
-    <button onclick="sendEth()" style="width: 100%; background: #fff; color: #000; border: none; padding: 1.2rem; border-radius: 12px; font-weight: 800; cursor: pointer;">
-        INITIATE SUPPORT (0.01 ETH)
-    </button>
+<div class="glass" style="text-align: center; max-width: 600px; margin: auto;">
+    <h2>Support <span class="accent">TheHub</span></h2>
+    <p>Project Address (ETH):</p>
+    <div style="background: #020617; padding: 1rem; border-radius: 8px; word-break: break-all; font-family: monospace;">{{ wallet }}</div>
 </div>
-<script>
-    async function sendEth() {
-        if (window.ethereum) {
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
-            const tx = await signer.sendTransaction({ to: "{{ wallet }}", value: ethers.utils.parseEther("0.01") });
-            alert("Transaction Broadcasted!");
-        } else { alert("Connect Trust Wallet!"); }
-    }
-</script>
 {% endblock %}
