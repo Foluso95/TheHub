@@ -1,15 +1,15 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template
 import requests
 import os
 
 app = Flask(__name__)
 
-# Replace these with your actual keys
-NEWS_API_KEY = "YOUR_ACTUAL_NEWS_API_KEY"
-AIRLABS_API_KEY = "YOUR_ACTUAL_AIRLABS_API_KEY"
+# --- CONFIGURATION ---
+NEWS_API_KEY = "39bbc467ab07459396692bfbc8564151"
+AIRLABS_API_KEY = "e6f87644-fdb1-4963-a391-1d66b790ded0"
 ETH_WALLET = "0x5b2ca3bac67d28d254a16fe3341ca6a136913ed3"
 
-# APIs often block requests that don't look like they come from a browser
+# Headers to prevent being blocked by API providers
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) TheHub/1.0"}
 
 
@@ -18,13 +18,11 @@ def home():
     news_articles = []
     try:
         url = f"https://newsapi.org/v2/everything?q=aviation&sortBy=publishedAt&pageSize=3&apiKey={NEWS_API_KEY}"
-        # NewsAPI Free Tier might block this on Vercel; we add a timeout and check status
         response = requests.get(url, headers=HEADERS, timeout=5)
         if response.status_code == 200:
             news_articles = response.json().get("articles", [])
     except Exception as e:
-        print(f"News fetch failed: {e}")  # This will show in Vercel Logs
-
+        print(f"News Error: {e}")
     return render_template("index.html", wallet=ETH_WALLET, news=news_articles)
 
 
@@ -35,10 +33,12 @@ def aviation():
         url = f"https://airlabs.co/api/v9/flights?api_key={AIRLABS_API_KEY}"
         response = requests.get(url, headers=HEADERS, timeout=10)
         if response.status_code == 200:
-            flights_data = response.json().get("response", [])
-            # Limit results to 15 flights so the page loads fast
-            flights_data = flights_data[:15]
+            flights_data = response.json().get("response", [])[:15]
     except Exception as e:
-        print(f"AirLabs fetch failed: {e}")
-
+        print(f"AirLabs Error: {e}")
     return render_template("aviation.html", flights=flights_data)
+
+
+@app.route("/wallet")
+def wallet():
+    return render_template("wallet.html", wallet=ETH_WALLET)

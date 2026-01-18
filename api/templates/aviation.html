@@ -1,26 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="glass">
-    <h2 style="margin-bottom: 2rem;">AirLabs Global Live Feed</h2>
-    <div style="overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; text-align: left;">
-            <tr style="color: #64748b; font-size: 0.8rem; border-bottom: 1px solid #1e293b;">
-                <th style="padding: 1rem;">IDENT</th>
-                <th>AIRLINE</th>
-                <th>ALTITUDE</th>
-                <th>SPEED</th>
-                <th>STATUS</th>
+    <h2 style="margin-bottom: 2rem;">AirLabs <span class="accent">Live Feed</span></h2>
+    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+        <thead style="color: #64748b; font-size: 0.75rem; text-transform: uppercase;">
+            <tr style="border-bottom: 1px solid #1e293b;">
+                <th style="padding: 1rem 0;">Flight</th>
+                <th>Airline</th>
+                <th>Alt (ft)</th>
+                <th>Speed (km/h)</th>
             </tr>
+        </thead>
+        <tbody>
             {% for f in flights %}
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <td style="padding: 1.2rem; font-weight: bold; color: var(--accent);">{{ f.flight_iata or f.flight_icao }}</td>
-                <td>{{ f.airline_iata or 'Private' }}</td>
-                <td>{{ f.alt }} ft</td>
-                <td>{{ f.speed }} km/h</td>
-                <td><span style="color: #4ade80; background: rgba(74, 222, 128, 0.1); padding: 4px 10px; border-radius: 20px; font-size: 0.7rem;">● LIVE</span></td>
+                <td style="padding: 1rem 0; color: var(--accent); font-weight: 700;">{{ f.flight_iata or f.flight_icao }}</td>
+                <td>{{ f.airline_iata or 'N/A' }}</td>
+                <td>{{ f.alt }}</td>
+                <td>{{ f.speed }}</td>
             </tr>
             {% endfor %}
-        </table>
-    </div>
+        </tbody>
+    </table>
 </div>
 {% endblock %}

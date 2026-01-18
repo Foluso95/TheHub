@@ -1,23 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-<div style="text-align: center; padding: 3rem 0;">
-    <h1 style="font-size: 3.5rem; margin: 0; font-weight: 800;">TheHub <span style="color:var(--accent)">Intel.</span></h1>
-    <p style="color: #94a3b8; margin-bottom: 4rem;">Real-time aviation data and decentralized transparency.</p>
+<div style="text-align: center; padding: 2rem 0;">
+    <h1 style="font-size: 3rem; margin-bottom: 0.5rem;">Global <span class="accent">Intelligence.</span></h1>
+    <p style="color: #94a3b8; margin-bottom: 3rem;">Live aviation updates and news aggregation.</p>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left; margin-bottom: 4rem;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
         {% for article in news %}
-        <div class="glass" style="padding: 1.5rem; display: flex; flex-direction: column;">
-            <img src="{{ article.urlToImage }}" style="width: 100%; height: 160px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;" onerror="this.src='https://via.placeholder.com/300x160?text=Aviation+News'">
-            <h3 style="font-size: 1.1rem; margin: 0; color: white;">{{ article.title[:70] }}...</h3>
-            <p style="font-size: 0.85rem; color: #94a3b8; margin: 15px 0;">{{ article.description[:110] if article.description else 'No description available.' }}...</p>
-            <a href="{{ article.url }}" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: bold; margin-top: auto;">READ FULL INTEL ➔</a>
+        <div class="glass">
+            <img src="{{ article.urlToImage }}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;" onerror="this.src='https://via.placeholder.com/300x180?text=News'">
+            <h3 style="font-size: 1.1rem; margin: 0;">{{ article.title[:80] }}...</h3>
+            <p style="font-size: 0.9rem; color: #94a3b8; margin: 1rem 0;">{{ article.description[:120] if article.description else '' }}...</p>
+            <a href="{{ article.url }}" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 700; font-size: 0.8rem;">READ REPORT ➔</a>
         </div>
         {% endfor %}
-    </div>
-
-    <div class="glass" style="max-width: 500px; margin: auto;">
-        <h4 style="margin-top:0; color: var(--accent);">DEVELOPMENT FUND</h4>
-        <div style="background: #020617; padding: 1rem; border-radius: 10px; font-family: monospace; font-size: 0.8rem; border: 1px solid #1e293b;">{{ wallet }}</div>
     </div>
 </div>
 {% endblock %}
