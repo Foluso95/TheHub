@@ -1,4 +1,5 @@
-from flask import Flask, render_template, requests, make_response, send_from_directory
+from flask import Flask, render_template, make_response, send_from_directory
+import requests
 import os
 
 app = Flask(__name__)
@@ -75,7 +76,15 @@ def checkout():
     return render_template("checkout.html", paystack=PAYSTACK_LINK, wallet=ETH_WALLET)
 
 
-# --- HIGH PRIORITY: SEO & SYSTEM ROUTES ---
+# --- SEO & GOOGLE VERIFICATION ROUTES ---
+
+
+@app.route("/googledadc4e071c25e5f7.html")
+def google_verify():
+    # Serves the verification file from the api/static folder
+    return send_from_directory(
+        os.path.join(app.root_path, "static"), "googledadc4e071c25e5f7.html"
+    )
 
 
 @app.route("/robots.txt")

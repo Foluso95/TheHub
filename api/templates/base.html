@@ -4,47 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="google-site-verification" content="YOUR_CODE_FROM_GOOGLE" />
-
     <title>TheHub Global | Aviation Intelligence & Travel Logistics</title>
-    <meta name="description" content="TheHub Global: Independent terminal for real-time aviation data, technical flight logs, and bespoke travel planning in Nigeria.">
-    <meta name="keywords" content="Aviation Intel, Flight Logs Nigeria, Travel Planning, Flight Tracking, TheHub Global, Foluso Sowunmi">
-    <meta name="author" content="Foluso Sowunmi">
+    <meta name="description" content="Independent terminal for real-time aviation data, technical flight logs, and bespoke travel planning. Built by Foluso Sowunmi.">
+    <meta name="keywords" content="Aviation Intel, Flight Tracking Nigeria, Travel Planning, TheHub Global">
 
-    <meta property="og:title" content="TheHub Global | Aviation Intel Terminal">
-    <meta property="og:description" content="Real-time aviation data and custom travel logistics at your fingertips.">
+    <meta property="og:title" content="TheHub Global Intelligence">
+    <meta property="og:description" content="Access real-time aviation data and custom travel logistics.">
     <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/784/784306.png">
-    <meta property="og:type" content="website">
     <meta property="og:url" content="https://thehubglobal.vercel.app">
 
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/784/784306.png">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 
     <style>
         :root { --bg: #020617; --card: #0f172a; --accent: #38bdf8; --text: #f8fafc; }
-        * { box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; margin: 0; line-height: 1.6; overflow-x: hidden; }
-
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); position: sticky; top: 0; border-bottom: 1px solid #1e293b; z-index: 1000; }
-        .logo { font-weight: 700; font-size: 1.5rem; letter-spacing: -1px; text-decoration: none; color: white; }
-        .nav-links a { color: #94a3b8; text-decoration: none; margin-left: 20px; font-weight: 500; font-size: 0.85rem; transition: 0.3s; }
+        body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; margin: 0; line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1e293b; }
+        .logo { font-weight: 700; font-size: 1.4rem; text-decoration: none; color: white; }
+        .nav-links a { color: #94a3b8; text-decoration: none; margin-left: 20px; font-size: 0.85rem; font-weight: 500; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
-
         .container { max-width: 1100px; margin: auto; padding: 2rem 5%; min-height: 75vh; }
-        .glass { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.5rem; backdrop-filter: blur(10px); transition: 0.3s; }
+        .glass { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.5rem; }
         .accent { color: var(--accent); }
-
-        footer { margin-top: 5rem; padding: 4rem 5%; border-top: 1px solid #1e293b; background: #020617; text-align: center; }
-        .disclaimer-box { font-size: 0.75rem; color: #64748b; max-width: 800px; margin: auto; line-height: 1.7; background: rgba(15, 23, 42, 0.5); padding: 25px; border-radius: 12px; border: 1px solid #1e293b; }
-
-        @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 15px; text-align: center; }
-            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-            .nav-links a { margin: 0; font-size: 0.8rem; }
-        }
+        footer { margin-top: 5rem; padding: 4rem 5%; border-top: 1px solid #1e293b; text-align: center; font-size: 0.8rem; color: #64748b; }
+        @media (max-width: 768px) { nav { flex-direction: column; gap: 10px; } .nav-links a { margin: 0 10px; } }
     </style>
 </head>
 <body>
@@ -52,29 +36,24 @@
         <a href="/" class="logo">THE<span class="accent">HUB</span></a>
         <div class="nav-links">
             <a href="/">INTEL</a>
-            <a href="/aviation">AVIATION DATA</a>
-            <a href="/travel-planning">TRAVEL PLANNING</a>
+            <a href="/aviation">DATA</a>
+            <a href="/travel-planning">TRAVEL</a>
             <a href="/support" style="color: #4ade80;">SUPPORT</a>
         </div>
     </nav>
 
-    <main class="container">
+    <div class="container">
         {% block content %}{% endblock %}
-    </main>
+    </div>
 
     <footer>
-        <div class="disclaimer-box">
-            <strong>OFFICIAL DISCLOSURE:</strong> TheHub Global is an independent aviation intelligence and logistics terminal. The operator is <strong>NOT</strong> a government official and does <strong>NOT</strong> work for any embassy, the Nigerian government, FAAN, NCAA, or any official tourism board.
+        <div style="background: rgba(15, 23, 42, 0.5); padding: 20px; border-radius: 12px; max-width: 800px; margin: auto;">
+            <strong>OFFICIAL DISCLOSURE:</strong> TheHub Global is an independent terminal. The operator is NOT a government official and does NOT work for any embassy or aviation board.
         </div>
-
-        <div style="margin-top: 2.5rem; font-size: 0.9rem; color: #94a3b8;">
+        <div style="margin-top: 2rem;">
             <a href="/terms" style="color: var(--accent); text-decoration: none;">Terms of Service</a> |
             <a href="https://wa.me/2349063350998" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">WhatsApp Terminal</a>
         </div>
-
-        <p style="margin-top: 25px; color: #1e293b; font-size: 0.65rem; letter-spacing: 1px;">
-            © 2026 THEHUB GLOBAL TERMINAL | LAGOS, NIGERIA
-        </p>
     </footer>
 </body>
 </html>
