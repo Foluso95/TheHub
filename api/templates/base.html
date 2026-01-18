@@ -3,56 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheHub | Global Aviation Intel</title>
+
+    <title>TheHub Global | Aviation Intel & Bespoke Travel</title>
+    <meta name="description" content="TheHub Global provides independent aviation intelligence, real-time flight data logs, and custom travel consultancy.">
+    <meta name="keywords" content="Aviation Data, Flight Tracking Nigeria, Travel Planning, Intel Logs, TheHub Global">
+
+    <meta property="og:title" content="TheHub Global Intelligence">
+    <meta property="og:description" content="Independent Aviation Intel and Travel Logistics.">
+    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/784/784306.png">
+
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/784/784306.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #020617; --card: #0f172a; --accent: #38bdf8; --text: #f8fafc; }
-        * { box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; margin: 0; line-height: 1.6; }
-
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); position: sticky; top: 0; border-bottom: 1px solid #1e293b; z-index: 1000; }
-        .logo { font-weight: 700; font-size: 1.5rem; letter-spacing: -1px; text-decoration: none; color: white; }
-        .nav-links a { color: #94a3b8; text-decoration: none; margin-left: 20px; font-weight: 500; font-size: 0.85rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
-
-        .container { max-width: 1100px; margin: auto; padding: 2rem 5%; min-height: 75vh; }
-        .glass { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.5rem; backdrop-filter: blur(10px); }
+        body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; margin: 0; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1e293b; }
+        .nav-links a { color: #94a3b8; text-decoration: none; margin-left: 20px; font-size: 0.85rem; }
+        .container { max-width: 1100px; margin: auto; padding: 2rem 5%; min-height: 80vh; }
+        .glass { background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.5rem; }
         .accent { color: var(--accent); }
-
-        footer { margin-top: 5rem; padding: 4rem 5%; border-top: 1px solid #1e293b; background: #020617; text-align: center; }
-        .disclaimer { font-size: 0.75rem; color: #64748b; max-width: 800px; margin: auto; line-height: 1.7; background: rgba(15, 23, 42, 0.5); padding: 20px; border-radius: 12px; }
-
-        @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 15px; text-align: center; }
-            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-            .nav-links a { margin: 0; font-size: 0.75rem; }
-        }
     </style>
 </head>
 <body>
     <nav>
-        <a href="/" class="logo">THE<span class="accent">HUB</span></a>
+        <div style="font-weight: 700;">THE<span class="accent">HUB</span></div>
         <div class="nav-links">
             <a href="/">INTEL</a>
-            <a href="/aviation">AVIATION DATA</a>
-            <a href="/travel-planning">TRAVEL PLANNING</a>
-            <a href="/support" style="color: #4ade80;">SUPPORT</a>
+            <a href="/aviation">DATA</a>
+            <a href="/travel-planning">TRAVEL</a>
+            <a href="/support">SUPPORT</a>
         </div>
     </nav>
-
-    <div class="container">
-        {% block content %}{% endblock %}
-    </div>
-
-    <footer>
-        <div class="disclaimer">
-            <strong>OFFICIAL DISCLOSURE:</strong> TheHub Global is an independent aviation intelligence platform. The operator is <strong>NOT</strong> a government official and does <strong>NOT</strong> work for any embassy, the Nigerian government, FAAN, NCAA, or any hospitality/aviation board.
+    <div class="container">{% block content %}{% endblock %}</div>
+    <footer style="text-align: center; padding: 4rem; border-top: 1px solid #1e293b;">
+        <p style="font-size: 0.7rem; color: #475569; max-width: 700px; margin: auto;">
+            <strong>DISCLAIMER:</strong> Independent consultant. Not affiliated with any embassy or government board.
+        </p>
+        <div style="margin-top: 1rem;">
+            <a href="/terms" style="color: var(--accent); text-decoration: none; font-size: 0.8rem;">Terms of Service</a> |
+            <a href="https://wa.me/2349063350998" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none; font-size: 0.8rem;">Contact Operator</a>
         </div>
-        <div style="margin-top: 2rem; font-size: 0.85rem; color: #94a3b8;">
-            <a href="/terms" style="color: var(--accent); text-decoration: none;">Terms of Service</a> |
-            WhatsApp: +234 906 335 0998
-        </div>
-        <p style="margin-top: 20px; color: #1e293b; font-size: 0.6rem;">© 2026 THEHUB GLOBAL TERMINAL</p>
     </footer>
 </body>
 </html>

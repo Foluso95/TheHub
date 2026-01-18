@@ -1,62 +1,98 @@
-from flask import Flask, render_template
-import requests
+from flask import Flask, render_template, requests, make_response, send_from_directory
+import os
 
 app = Flask(__name__)
 
 # --- CONFIGURATION ---
-NEWS_API_KEY = '39bbc467ab07459396692bfbc8564151'
-AIRLABS_API_KEY = 'e6f87644-fdb1-4963-a391-1d66b790ded0'
+NEWS_API_KEY = "39bbc467ab07459396692bfbc8564151"
+AIRLABS_API_KEY = "e6f87644-fdb1-4963-a391-1d66b790ded0"
 ETH_WALLET = "0x5b2ca3bac67d28d254a16fe3341ca6a136913ed3"
 PAYSTACK_LINK = "https://paystack.shop/pay/tskni695ms"
 
-@app.route('/')
-def home():
-    news = []
-    stats = {
-        'logs_delivered': 124,
-        'active_queries': 8,
-        'system_uptime': "99.9%",
-        'global_reach': "24 Countries"
-    }
-    try:
-        # Optimized news query
-        url = f"https://newsapi.org/v2/everything?q=aviation+tech&sortBy=publishedAt&pageSize=3&apiKey={NEWS_API_KEY}"
-        res = requests.get(url, timeout=5)
-        news = res.json().get('articles', [])
-    except Exception:
-        news = []
-    return render_template('index.html', news=news, stats=stats)
 
-@app.route('/aviation')
+@app.route("/")
+def home():
+    stats = {
+        "logs_delivered": 124,
+        "active_queries": 8,
+        "system_uptime": "99.9%",
+        "global_reach": "24 Countries",
+    }
+    news = []
+    try:
+        url = f"https://newsapi.org/v2/everything?q=aviation&sortBy=publishedAt&pageSize=3&apiKey={NEWS_API_KEY}"
+        news = requests.get(url, timeout=5).json().get("articles", [])
+    except:
+        pass
+    return render_template("index.html", news=news, stats=stats)
+
+
+@app.route("/aviation")
 def aviation():
     combined_data = []
     try:
-        # Fetch Live & Scheduled with 8-second timeout for stability
-        live_res = requests.get(f"https://airlabs.co/api/v9/flights?api_key={AIRLABS_API_KEY}", timeout=8).json().get('response', [])
-        for f in live_res:
-            f['status_type'] = 'LIVE'
-            combined_data.append(f)
-
-        sched_res = requests.get(f"https://airlabs.co/api/v9/schedules?api_key={AIRLABS_API_KEY}", timeout=8).json().get('response', [])
-        for s in sched_res:
-            s['status_type'] = 'SCHEDULED'
-            combined_data.append(s)
-    except Exception:
+        live = (
+            requests.get(
+                f"https://airlabs.co/api/v9/flights?api_key={AIRLABS_API_KEY}",
+                timeout=8,
+            )
+            .json()
+            .get("response", [])
+        )
+        sched = (
+            requests.get(
+                f"https://airlabs.co/api/v9/schedules?api_key={AIRLABS_API_KEY}",
+                timeout=8,
+            )
+            .json()
+            .get("response", [])
+        )
+        combined_data = [{"status_type": "LIVE", **f} for f in live] + [
+            {"status_type": "SCHEDULED", **s} for s in sched
+        ]
+    except:
         pass
-    return render_template('aviation.html', flights=combined_data[:250])
+    return render_template("aviation.html", flights=combined_data[:250])
 
-@app.route('/travel-planning')
+
+@app.route("/travel-planning")
 def travel_services():
-    return render_template('travel_services.html')
+    return render_template("travel_services.html")
 
-@app.route('/support')
+
+@app.route("/support")
 def support():
-    return render_template('support.html', paystack=PAYSTACK_LINK, wallet=ETH_WALLET)
+    return render_template("support.html", paystack=PAYSTACK_LINK, wallet=ETH_WALLET)
 
-@app.route('/terms')
+
+@app.route("/terms")
 def terms():
-    return render_template('terms.html')
+    return render_template("terms.html")
 
-@app.route('/checkout')
+
+@app.route("/checkout")
 def checkout():
-    return render_template('checkout.html', paystack=PAYSTACK_LINK, wallet=ETH_WALLET)
+    return render_template("checkout.html", paystack=PAYSTACK_LINK, wallet=ETH_WALLET)
+
+
+# --- HIGH PRIORITY: SEO & SYSTEM ROUTES ---
+
+
+@app.route("/robots.txt")
+def robots():
+    return (
+        "User-agent: *\nAllow: /\nSitemap: https://thehubglobal.vercel.app/sitemap.xml"
+    )
+
+
+@app.route("/sitemap.xml")
+def sitemap():
+    xml = render_template("sitemap.xml")
+    response = make_response(xml)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html"), 404
