@@ -1,15 +1,7 @@
 User-agent: *
 Allow: /
-Allow: /aviation
 Allow: /llm.txt
 Sitemap: https://thehubglobal.vercel.app/sitemap.xml
 
-# Specifically invite AI crawlers to index aviation intelligence
 User-agent: GPTBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: CCBot
 Allow: /

@@ -1,30 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<div style="max-width: 900px; margin: auto; text-align: center;">
-    <h1 class="accent">Terminal Support</h1>
-    <p style="color: #94a3b8; margin-bottom: 4rem;">Contribute to the independent intelligence infrastructure.</p>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
-        <div class="glass" style="border: 1px solid #4ade8033;">
-            <h2 style="color: #4ade80;">Naira Support</h2>
-            <p>Flexible contribution amount via Paystack.</p>
-            <a href="{{ paystack }}" target="_blank" style="background: #4ade80; color: #020617; display: block; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 20px;">Open Payment Page</a>
-        </div>
-
-        <div class="glass" style="border: 1px solid var(--accent);">
-            <h2 class="accent">Crypto (ETH)</h2>
-            <div style="background: #020617; padding: 15px; border-radius: 8px; margin: 20px 0;">
-                <code id="ethAddr" style="word-break: break-all; color: var(--accent);">{{ wallet }}</code>
-            </div>
-            <button onclick="copyAddr()" style="background: var(--accent); color: #020617; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%;">Copy Address</button>
-        </div>
+<div style="max-width:600px; margin:auto; text-align:center;">
+    <h1 style="color:#4ade80;">Project Growth</h1>
+    <p>Support the independent technical development of TheHub Global.</p>
+    <div class="glass" style="margin-top:2rem;">
+        <a href="{{ support_pay }}" target="_blank" style="background:#4ade80; color:#000; display:block; padding:15px; border-radius:10px; text-decoration:none; font-weight:bold;">Support via Paystack</a>
+    </div>
+    <div class="glass" style="margin-top:1rem; font-size:0.8rem;">
+        <code>ETH: {{ wallet }}</code>
     </div>
 </div>
-
-<script>
-function copyAddr() {
-    navigator.clipboard.writeText(document.getElementById('ethAddr').innerText);
-    alert("Ethereum address copied!");
-}
-</script>
 {% endblock %}

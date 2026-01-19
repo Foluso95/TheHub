@@ -1,14 +1,16 @@
-from flask import Flask, render_template, make_response, send_from_directory, request
+from flask import Flask, render_template, make_response, send_from_directory
 import requests
 import os
 
 app = Flask(__name__)
 
-# --- CONFIGURATION ---
-# Replace with your flexible 'Payment Page' link
-PAYSTACK_LINK = "https://paystack.com/pay/your_flexible_link"
+# --- CENTRAL HUB CONFIGURATION ---
+PAYSTACK_DATA_LOGS = "https://paystack.shop/pay/tskni695ms"
+PAYSTACK_SUPPORT = "https://paystack.shop/pay/m2091khojf"
 ETH_WALLET = "0x5b2ca3bac67d28d254a16fe3341ca6a136913ed3"
 WHATSAPP_HUB = "https://wa.me/2349063350998"
+
+# API Keys
 AIRLABS_API_KEY = "e6f87644-fdb1-4963-a391-1d66b790ded0"
 NEWS_API_KEY = "39bbc467ab07459396692bfbc8564151"
 
@@ -50,30 +52,26 @@ def aviation():
         ]
     except:
         pass
-    return render_template("aviation.html", flights=combined_data[:150])
+    return render_template(
+        "aviation.html", flights=combined_data[:150], data_pay=PAYSTACK_DATA_LOGS
+    )
 
 
 @app.route("/support")
 def support():
     return render_template(
-        "support.html", paystack=PAYSTACK_LINK, wallet=ETH_WALLET, whatsapp=WHATSAPP_HUB
+        "support.html",
+        support_pay=PAYSTACK_SUPPORT,
+        wallet=ETH_WALLET,
+        whatsapp=WHATSAPP_HUB,
     )
 
 
-# --- AUTOMATED LOGO ROUTES ---
+# --- AUTOMATED LOGO & STATIC ROUTES ---
 @app.route("/apple-touch-icon.png")
-@app.route("/favicon-32x32.png")
-@app.route("/favicon-16x16.png")
 @app.route("/favicon.ico")
 def serve_logo():
-    # Maps all icon requests to your 'logo.png' automatically
     return send_from_directory(os.path.join(app.root_path, "static"), "logo.png")
-
-
-# --- SEO & DISCOVERY ---
-@app.route("/llm.txt")
-def llm_txt():
-    return send_from_directory(os.path.join(app.root_path, "static"), "llm.txt")
 
 
 @app.route("/sitemap.xml")
@@ -83,14 +81,7 @@ def sitemap():
     return response
 
 
-@app.route("/googledadc4e071c25e5f7.html")
-def google_verify():
-    return send_from_directory(
-        os.path.join(app.root_path, "static"), "googledadc4e071c25e5f7.html"
-    )
-
-
-# Static Pages
+# Standard Page Routes
 @app.route("/travel-planning")
 def travel():
     return render_template("travel_services.html")
@@ -104,6 +95,16 @@ def terms():
 @app.route("/checkout")
 def checkout():
     return render_template("checkout.html")
+
+
+@app.route("/success")
+def success():
+    return render_template("success.html")
+
+
+@app.route("/wallet")
+def wallet_page():
+    return render_template("wallet.html", wallet=ETH_WALLET)
 
 
 @app.errorhandler(404)
