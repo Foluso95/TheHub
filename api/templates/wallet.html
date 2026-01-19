@@ -1,17 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="glass" style="max-width: 600px; margin: 4rem auto; text-align: center;">
-    <h2 class="accent">Treasury</h2>
-    <p>Official Project Address (ERC-20)</p>
-    <div style="background: #020617; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--accent); word-break: break-all; font-family: monospace; margin-bottom: 2rem;">{{ wallet }}</div>
-    <button onclick="connect()" id="wb" style="background: var(--accent); color: #020617; border: none; padding: 1rem; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer;">CONNECT WALLET</button>
+<div class="glass" style="max-width: 600px; margin: auto; text-align: center;">
+    <h1 class="accent">Crypto Terminal</h1>
+    <p>Direct Ethereum (ERC-20) Contributions</p>
+    <div style="background: #020617; padding: 20px; border-radius: 12px; border: 1px solid #1e293b; margin: 2rem 0;">
+        <code style="word-break: break-all; color: var(--accent);">{{ wallet }}</code>
+    </div>
+    <button onclick="copy()" style="background: var(--accent); color: #000; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold;">Copy Address</button>
 </div>
-<script>
-async function connect() {
-    if (window.ethereum) {
-        const acc = await ethereum.request({ method: 'eth_requestAccounts' });
-        document.getElementById('wb').innerHTML = "CONNECTED: " + acc[0].substring(0,8) + "...";
-    }
-}
-</script>
+<script> function copy() { navigator.clipboard.writeText('{{ wallet }}'); alert('Address Copied'); } </script>
 {% endblock %}
