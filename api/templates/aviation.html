@@ -1,44 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="glass">
-    <h2>Data <span class="accent">Terminal</span></h2>
-    <input type="text" id="flightSearch" placeholder="Search City (Lagos), Airline (Dana/Lufthansa), or Code (LOS/DLH)..."
-           style="width: 100%; padding: 15px; margin-bottom: 25px; border-radius: 10px; border: 1px solid var(--accent); background: #020617; color: white; outline: none;">
-
-    <table style="width: 100%; border-collapse: collapse; text-align: left;">
-        <thead style="color: #64748b; font-size: 0.75rem; text-transform: uppercase;">
-            <tr style="border-bottom: 1px solid #1e293b;">
-                <th style="padding-bottom: 1rem;">Identifier</th>
-                <th>Provider</th>
-                <th>Path</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="flightTable">
-            {% for f in flights %}
-            <tr class="flight-row"
-                data-keywords="{{ f.flight_iata }} {{ f.airline_iata }} {{ f.dep_iata }} {{ f.arr_iata }} DANA PEACE ARIK NIGERIA LAGOS LUFT DELTA"
-                style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <td style="padding: 1.2rem 0;">
-                    <span style="color: var(--accent); font-weight: bold;">{{ f.flight_iata or 'PRV' }}</span><br>
-                    <small style="color: {% if f.status_type == 'LIVE' %}#4ade80{% else %}#94a3b8{% endif %}; font-size: 0.65rem;">● {{ f.status_type }}</small>
-                </td>
-                <td style="font-size: 0.9rem;">{{ f.airline_iata or 'N/A' }}</td>
-                <td style="font-size: 0.9rem;">{{ f.dep_iata or '???' }} ➔ {{ f.arr_iata or '???' }}</td>
-                <td><a href="/checkout" style="background: var(--accent); color: #020617; padding: 6px 14px; border-radius: 6px; text-decoration: none; font-weight: 800; font-size: 0.7rem;">BUY LOGS</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div style="margin-bottom: 2rem;">
+    <h1 class="accent" style="margin-bottom: 10px;">Aviation <span style="color:white;">Data Terminal</span></h1>
+    <p style="color: #94a3b8;">Scanning global transponder networks for live and scheduled flight data.</p>
 </div>
+
+<div class="glass" style="margin-bottom: 2rem; border: 1px solid #1e293b;">
+    <input type="text" id="flightSearch" placeholder="Filter by Flight Number, Airline, or Airport Code..."
+           style="width: 100%; background: transparent; border: none; color: white; padding: 12px; outline: none; font-size: 1rem;">
+</div>
+
+{% if not flights %}
+<div class="glass" style="text-align: center; border: 1px solid #f59e0b44; padding: 3rem;">
+    <div style="color: #f59e0b; font-size: 1.2rem; font-weight: bold;">System Standby</div>
+    <p style="color: #64748b; margin-top: 10px;">Establishing connection to AirLabs Satellite Feed. Please refresh in 5 seconds if data does not appear.</p>
+</div>
+{% else %}
+<div id="flightList" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+    {% for flight in flights %}
+    <div class="glass flight-card" data-search="{{ flight.flight_iata }} {{ flight.airline_name }} {{ flight.dep_iata }} {{ flight.arr_iata }}" style="border-left: 4px solid {{ '#4ade80' if flight.status_type == 'LIVE' else '#334155' }};">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-weight: bold; color: var(--accent);">{{ flight.flight_iata or 'TBA' }}</span>
+            <small style="background: #1e293b; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem;">{{ flight.status_type }}</small>
+        </div>
+        <div style="font-size: 0.9rem;">
+            <div><span style="color:#475569;">Carrier:</span> {{ flight.airline_name or 'Independent' }}</div>
+            <div><span style="color:#475569;">Route:</span> {{ flight.dep_iata or '???' }} → {{ flight.arr_iata or '???' }}</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
 <script>
-document.getElementById('flightSearch').addEventListener('keyup', function() {
-    let filter = this.value.toUpperCase();
-    let rows = document.querySelectorAll('.flight-row');
-    rows.forEach(row => {
-        let text = row.getAttribute('data-keywords') + row.innerText;
-        row.style.display = text.toUpperCase().includes(filter) ? "" : "none";
+    document.getElementById('flightSearch').addEventListener('keyup', function() {
+        let filter = this.value.toUpperCase();
+        let cards = document.getElementsByClassName('flight-card');
+        for (let i = 0; i < cards.length; i++) {
+            let content = cards[i].getAttribute('data-search').toUpperCase();
+            cards[i].style.display = content.includes(filter) ? "" : "none";
+        }
     });
-});
 </script>
 {% endblock %}
