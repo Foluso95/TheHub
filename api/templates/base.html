@@ -3,90 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheHub Global | Aviation Intelligence Hub</title>
 
-    <title>TheHub Global | Aviation Intelligence Hub & Strategic Logistics</title>
-    <meta name="description" content="TheHub Global is the go-to intelligence hub for global aviation data, technical flight logs, and bespoke travel planning. Operated by @i-amFolu.">
-    <meta name="keywords" content="Aviation Intelligence Hub, Flight Logs, TheHub Global, Travel Logistics, @i-amFolu, Global Aviation Data">
-
+    <meta name="description" content="TheHub Global: Aviation intelligence terminal by @i-amFolu.">
     <link rel="canonical" href="https://thehubglobal.vercel.app{{ request.path }}">
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "TheHub Global Aviation Intelligence Hub",
-      "url": "https://thehubglobal.vercel.app",
-      "logo": "https://cdn-icons-png.flaticon.com/512/784/784306.png",
-      "description": "The go-to intelligence hub for global aviation data and strategic logistics.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Lagos",
-        "addressCountry": "NG"
-      },
-      "founder": {
-        "@type": "Person",
-        "name": "Foluso Sowunmi",
-        "alternateName": "@i-amFolu"
-      },
-      "sameAs": [
-        "https://twitter.com/i-amFolu",
-        "https://facebook.com/i-amFolu"
-      ]
-    }
-    </script>
-
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
-
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/784/784306.png">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #020617; --card: #0f172a; --accent: #38bdf8; --text: #f8fafc; }
         body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; margin: 0; line-height: 1.6; }
         nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1e293b; }
-        .logo { font-weight: 700; font-size: 1.4rem; text-decoration: none; color: white; letter-spacing: -1px; }
-        .nav-links a { color: #94a3b8; text-decoration: none; margin-left: 20px; font-size: 0.9rem; font-weight: 500; transition: 0.3s; padding: 10px; min-height: 44px; display: inline-flex; align-items: center; }
-        .nav-links a:hover { color: var(--accent); }
+        .logo-img { height: 35px; width: auto; filter: brightness(1.2); }
+        .nav-links a { color: #94a3b8; text-decoration: none; margin-left: 20px; font-size: 0.9rem; font-weight: 500; padding: 10px; }
         .container { max-width: 1100px; margin: auto; padding: 2rem 5%; min-height: 75vh; }
-        .glass { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.5rem; transition: 0.3s; }
+        .glass { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.5rem; }
         .accent { color: var(--accent); }
-        footer { margin-top: 5rem; padding: 4rem 5%; border-top: 1px solid #1e293b; background: #010409; text-align: center; }
-        .footer-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin: 2rem 0; }
-        .footer-nav a { color: #64748b; text-decoration: none; font-size: 0.85rem; padding: 10px; min-width: 44px; }
-        .social-links { margin-bottom: 2rem; display: flex; justify-content: center; gap: 20px; }
-        .social-links a { color: var(--accent); text-decoration: none; font-weight: bold; border: 1px solid #38bdf833; padding: 8px 16px; border-radius: 20px; }
-        @media (max-width: 768px) { nav { flex-direction: column; gap: 10px; } .nav-links { flex-wrap: wrap; justify-content: center; } }
+        footer { margin-top: 5rem; padding: 4rem 5%; border-top: 1px solid #1e293b; background: #010409; text-align: center; font-size: 0.8rem; color: #475569; }
     </style>
 </head>
 <body>
     <nav>
-        <a href="/" class="logo">THE<span class="accent">HUB</span> GLOBAL</a>
+        <a href="/">
+            <img src="/apple-touch-icon.png" alt="TheHub Global" class="logo-img">
+        </a>
         <div class="nav-links">
             <a href="/">INTEL</a>
             <a href="/aviation">DATA</a>
-            <a href="/travel-planning">TRAVEL</a>
-            <a href="/support">SUPPORT</a>
+            <a href="/support" style="color: #4ade80;">SUPPORT</a>
         </div>
     </nav>
     <main class="container">{% block content %}{% endblock %}</main>
     <footer>
-        <div class="social-links">
-            <a href="https://twitter.com/i-amFolu" target="_blank" rel="noopener">Twitter/X</a>
-            <a href="https://facebook.com/i-amFolu" target="_blank" rel="noopener">Facebook</a>
-        </div>
-        <nav class="footer-nav">
-            <a href="/">Home</a> <a href="/aviation">Aviation</a> <a href="/travel-planning">Planning</a>
-            <a href="/support">Support</a> <a href="/terms">Terms</a> <a href="/checkout">Checkout</a>
-        </nav>
-        <p style="color: #1e293b; font-size: 0.65rem;">© 2026 THEHUB GLOBAL | OPERATOR: @i-amFolu</p>
+        <p>© 2026 THEHUB GLOBAL | OPERATED BY @I-AMFOLU</p>
     </footer>
 </body>
 </html>

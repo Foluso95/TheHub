@@ -1,39 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
-<div style="max-width: 900px; margin: auto; padding: 2rem 0;">
-    <div style="text-align: center; margin-bottom: 4rem;">
-        <h1 class="accent" style="font-size: 2.5rem;">Terminal <span style="color:white;">Support</span></h1>
-        <p style="color: #94a3b8; font-size: 1.1rem;">Your contributions keep our transponder feeds active and independent.</p>
-    </div>
+<div style="max-width: 900px; margin: auto; text-align: center;">
+    <h1 class="accent">Terminal Support</h1>
+    <p style="color: #94a3b8; margin-bottom: 4rem;">Contribute to the independent intelligence infrastructure.</p>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
-        <div class="glass" style="border: 1px solid #4ade8033; display: flex; flex-direction: column; justify-content: space-between; padding: 2.5rem;">
-            <div>
-                <h2 style="margin-top:0;">Local Support (NGN)</h2>
-                <p style="color: #64748b; font-size: 0.95rem;">Support the hub using Nigerian Naira via our secure Paystack terminal.</p>
-            </div>
-            <div style="margin-top: 2rem;">
-                <a href="{{ paystack }}" target="_blank" rel="noopener noreferrer"
-                   style="background: #4ade80; color: #020617; text-align: center; display: block; padding: 16px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: 0.3s;">
-                   Open Paystack Terminal
-                </a>
-            </div>
+        <div class="glass" style="border: 1px solid #4ade8033;">
+            <h2 style="color: #4ade80;">Naira Support</h2>
+            <p>Flexible contribution amount via Paystack.</p>
+            <a href="{{ paystack }}" target="_blank" style="background: #4ade80; color: #020617; display: block; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 20px;">Open Payment Page</a>
         </div>
 
-        <div class="glass" style="border: 1px solid #38bdf833; padding: 2.5rem;">
-            <h2 style="margin-top:0;">Global Support (ETH)</h2>
-            <p style="color: #64748b; font-size: 0.95rem;">Direct Ethereum (ERC-20) contributions via Trust Wallet or MetaMask.</p>
-
-            <div style="margin-top: 2rem; background: #020617; padding: 20px; border-radius: 12px; border: 1px solid #1e293b;">
-                <small style="display: block; color: #475569; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Ethereum Address</small>
-                <code style="word-break: break-all; color: var(--accent); font-size: 0.9rem; font-family: monospace;">{{ wallet }}</code>
+        <div class="glass" style="border: 1px solid var(--accent);">
+            <h2 class="accent">Crypto (ETH)</h2>
+            <div style="background: #020617; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <code id="ethAddr" style="word-break: break-all; color: var(--accent);">{{ wallet }}</code>
             </div>
-            <p style="font-size: 0.75rem; color: #475569; margin-top: 15px;">Network: Ethereum Mainnet Only</p>
+            <button onclick="copyAddr()" style="background: var(--accent); color: #020617; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%;">Copy Address</button>
         </div>
-    </div>
-
-    <div style="margin-top: 4rem; text-align: center; color: #64748b; font-size: 0.85rem;">
-        <p>For custom intelligence requests or partnership inquiries, contact us via the WhatsApp terminal.</p>
     </div>
 </div>
+
+<script>
+function copyAddr() {
+    navigator.clipboard.writeText(document.getElementById('ethAddr').innerText);
+    alert("Ethereum address copied!");
+}
+</script>
 {% endblock %}

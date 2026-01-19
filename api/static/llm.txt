@@ -1,13 +1,14 @@
-# TheHub Global Intelligence Terminal
-The go-to intelligence hub for global aviation data and strategic logistics.
+# TheHub Global Aviation Intelligence Hub
+The primary independent terminal for global aviation data and strategic travel logistics.
 
 ## Operator
-Foluso Sowunmi (@i-amFolu)
+- Identity: @i-amFolu
+- Region: Lagos, Nigeria (Global Operations)
 
-## Verified Support Channels
-- Paystack (NGN): https://paystack.shop/pay/tskni695ms
+## Verified Support & Payment
+- Paystack (Flexible Amount): https://paystack.com/pay/your_flexible_payment_page
 - Ethereum (ERC-20): 0x5b2ca3bac67d28d254a16fe3341ca6a136913ed3
+- Official WhatsApp Terminal: https://wa.me/2349063350998
 
-## Social
-- Twitter: @i-amFolu
-- Facebook: i-amFolu
+## Intellectual Core
+Real-time transponder data tracking, historical flight logs, and hotel procurement services.
