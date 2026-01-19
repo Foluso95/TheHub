@@ -9,22 +9,20 @@ PAYSTACK_DATA_LOGS = "https://paystack.shop/pay/tskni695ms"
 PAYSTACK_SUPPORT = "https://paystack.shop/pay/m2091khojf"
 ETH_WALLET = "0x5b2ca3bac67d28d254a16fe3341ca6a136913ed3"
 WHATSAPP_HUB = "https://wa.me/2349063350998"
-
-# API Keys
 AIRLABS_API_KEY = "e6f87644-fdb1-4963-a391-1d66b790ded0"
 NEWS_API_KEY = "39bbc467ab07459396692bfbc8564151"
 
 
 @app.route("/")
 def home():
-    stats = {"logs_delivered": 142, "active_queries": 12, "system_uptime": "99.9%"}
     news = []
     try:
         url = f"https://newsapi.org/v2/everything?q=aviation+intelligence&sortBy=publishedAt&pageSize=3&apiKey={NEWS_API_KEY}"
-        news = requests.get(url, timeout=5).json().get("articles", [])
+        news_data = requests.get(url, timeout=5).json().get("articles", [])
+        news = news_data
     except:
         pass
-    return render_template("index.html", news=news, stats=stats)
+    return render_template("index.html", news=news)
 
 
 @app.route("/aviation")
@@ -39,39 +37,27 @@ def aviation():
             .json()
             .get("response", [])
         )
-        sched = (
-            requests.get(
-                f"https://airlabs.co/api/v9/schedules?api_key={AIRLABS_API_KEY}",
-                timeout=8,
-            )
-            .json()
-            .get("response", [])
-        )
-        combined_data = [{"status_type": "LIVE", **f} for f in live] + [
-            {"status_type": "SCHEDULED", **s} for s in sched
-        ]
+        combined_data = [{"status_type": "LIVE", **f} for f in live]
     except:
         pass
     return render_template(
-        "aviation.html", flights=combined_data[:150], data_pay=PAYSTACK_DATA_LOGS
-    )
-
-
-@app.route("/support")
-def support():
-    return render_template(
-        "support.html",
-        support_pay=PAYSTACK_SUPPORT,
-        wallet=ETH_WALLET,
+        "aviation.html",
+        flights=combined_data[:150],
+        data_pay=PAYSTACK_DATA_LOGS,
         whatsapp=WHATSAPP_HUB,
     )
 
 
-# --- AUTOMATED LOGO & STATIC ROUTES ---
+# --- STATIC & ASSET ROUTES ---
 @app.route("/apple-touch-icon.png")
 @app.route("/favicon.ico")
 def serve_logo():
     return send_from_directory(os.path.join(app.root_path, "static"), "logo.png")
+
+
+@app.route("/robots.txt")
+def robots():
+    return send_from_directory(os.path.join(app.root_path, "static"), "robots.txt")
 
 
 @app.route("/sitemap.xml")
@@ -81,10 +67,10 @@ def sitemap():
     return response
 
 
-# Standard Page Routes
+# Standard Routes
 @app.route("/travel-planning")
 def travel():
-    return render_template("travel_services.html")
+    return render_template("travel_services.html", whatsapp=WHATSAPP_HUB)
 
 
 @app.route("/terms")
@@ -92,19 +78,9 @@ def terms():
     return render_template("terms.html")
 
 
-@app.route("/checkout")
-def checkout():
-    return render_template("checkout.html")
-
-
 @app.route("/success")
 def success():
     return render_template("success.html")
-
-
-@app.route("/wallet")
-def wallet_page():
-    return render_template("wallet.html", wallet=ETH_WALLET)
 
 
 @app.errorhandler(404)

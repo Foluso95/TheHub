@@ -16,6 +16,10 @@
       "dest": "/api/static/robots.txt"
     },
     {
+      "src": "/favicon.ico",
+      "dest": "/api/static/logo.png"
+    },
+    {
       "src": "/(.*)",
       "dest": "/api/index.py"
     }

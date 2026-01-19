@@ -1,32 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-<div style="text-align: center; padding: 3rem 0;">
-    <h1 class="accent" style="font-size: 2.5rem;">Aviation Intelligence Terminal</h1>
-    <p style="color: #94a3b8; max-width: 700px; margin: auto;">Real-time transponder monitoring, satellite data logs, and strategic logistics procurement. Operated by @i-amFolu.</p>
+<div style="text-align:center; padding: 2rem 0;">
+    <h1 class="accent">TheHub Intelligence</h1>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 2rem;">
-    <div class="glass">
-        <h3>Live Terminal</h3>
-        <p>Access the global transponder feed and satellite tracking data.</p>
-        <a href="/aviation" class="accent" style="text-decoration: none; font-weight: bold;">Enter Terminal →</a>
-    </div>
-    <div class="glass">
-        <h3>Strategic Logistics</h3>
-        <p>Professional hotel procurement and itinerary optimization.</p>
-        <a href="/travel-planning" class="accent" style="text-decoration: none; font-weight: bold;">View Services →</a>
-    </div>
-</div>
-
-<div class="glass" style="margin-top: 3rem;">
-    <h3 class="accent">Latest Intel</h3>
-    <ul style="list-style: none; padding: 0;">
+<div class="glass">
+    <h3 class="accent" style="margin-bottom: 1.5rem;">Strategic Briefings</h3>
+    <div style="display: grid; gap: 20px;">
         {% for article in news %}
-        <li style="margin-bottom: 1rem; border-bottom: 1px solid #1e293b; padding-bottom: 1rem;">
-            <strong>{{ article.title }}</strong><br>
-            <small style="color: #64748b;">Source: {{ article.source.name }}</small>
-        </li>
+        <div style="border-bottom: 1px solid #1e293b; padding-bottom: 1.5rem;">
+            <h4 style="margin: 0; color: #fff;">{{ article.title }}</h4>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin: 10px 0;">{{ article.description or 'Encrypted briefing summary.' }}</p>
+            <a href="{{ article.url }}" target="_blank" style="color: var(--accent); text-decoration: none; font-size: 0.8rem; font-weight: bold; border-bottom: 1px solid var(--accent);">FULL ANALYSIS →</a>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
 </div>
 {% endblock %}

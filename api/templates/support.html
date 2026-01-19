@@ -1,13 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
-<div style="max-width:600px; margin:auto; text-align:center;">
-    <h1 style="color:#4ade80;">Project Growth</h1>
-    <p>Support the independent technical development of TheHub Global.</p>
-    <div class="glass" style="margin-top:2rem;">
-        <a href="{{ support_pay }}" target="_blank" style="background:#4ade80; color:#000; display:block; padding:15px; border-radius:10px; text-decoration:none; font-weight:bold;">Support via Paystack</a>
+<div style="max-width: 700px; margin: auto; text-align: center;">
+    <h1 style="color: #4ade80;">Project Support</h1>
+    <p style="color: #94a3b8;">Fuel the independent development of TheHub Global.</p>
+
+    <div class="glass" style="margin: 2rem 0; padding: 1rem; border-color: #1e293b;">
+        <p style="font-size: 0.8rem; margin-bottom: 10px;">Estimate Contribution (Naira to USD/EUR):</p>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <input type="number" id="nairaInput" placeholder="Enter NGN" oninput="convertCurrency()" style="background: #020617; border: 1px solid #1e293b; color: #fff; padding: 8px; border-radius: 5px; width: 120px;">
+            <div style="font-size: 0.9rem; align-self: center;">
+                <span id="usdVal" class="accent">$0.00</span> | <span id="eurVal" style="color: #4ade80;">€0.00</span>
+            </div>
+        </div>
     </div>
-    <div class="glass" style="margin-top:1rem; font-size:0.8rem;">
-        <code>ETH: {{ wallet }}</code>
+
+    <div class="glass" style="border-color: #4ade8033; padding: 2rem;">
+        <h3>Growth Contribution</h3>
+        <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">One-time or recurring support for system scaling.</p>
+        <a href="{{ support_pay }}" target="_blank" style="background: #4ade80; color: #020617; display: block; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: bold;">Support via Paystack</a>
     </div>
 </div>
+
+<script>
+function convertCurrency() {
+    let ngn = document.getElementById('nairaInput').value;
+    // Estimated rates - update these manually as needed
+    document.getElementById('usdVal').innerText = '$' + (ngn * 0.00065).toFixed(2);
+    document.getElementById('eurVal').innerText = '€' + (ngn * 0.00060).toFixed(2);
+}
+</script>
 {% endblock %}
