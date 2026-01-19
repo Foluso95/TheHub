@@ -1,4 +1,0 @@
-# TheHub Global
-Official Aviation Terminal by @i-amFolu.
-Aviation Data: https://thehubglobal.vercel.app/aviation
-Support Terminal: https://thehubglobal.vercel.app/support
