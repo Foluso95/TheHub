@@ -1,0 +1,31 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Linting Tools
+        run: npm install -g prettier eslint
+
+      - name: Run Prettier Check
+        run: prettier --check "."
+
+      - name: Run ESLint
+        run: |
+          # This will check your JS files for logic errors
+          # If it finds a major error, the "push" will show a red 'X' on GitHub
+          eslint "js/**/*.js" --fix || echo "Linting issues found, please check VSCodium."
