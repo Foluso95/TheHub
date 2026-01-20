@@ -32,7 +32,8 @@ html {
 body {
   background-color: var(--deep-navy);
   color: var(--text-main);
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* Use one consistent font-family declaration */
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
 }
