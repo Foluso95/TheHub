@@ -1,0 +1,70 @@
+/* THE HUB GLOBAL - DESIGN SYSTEM
+  Project: The Hub
+  Author: Foluso
+*/
+
+:root {
+  /* Core Colors */
+  --primary-gold: #d4af37; /* Classic gold for accents */
+  --deep-navy: #0a192f; /* Professional background */
+  --dark-surface: #112240; /* Card/Section background */
+  --text-main: #e6f1ff; /* High-readability white */
+  --text-dim: #8892b0; /* Secondary text */
+  --accent-blue: #64ffda; /* Web3/Tech accent color */
+
+  /* Spacing & Sizing */
+  --section-padding: 80px 20px;
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+}
+
+/* 1. Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--deep-navy);
+  color: var(--text-main);
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* 2. Standard Utility Classes (Use these in your HTML) */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.btn-primary {
+  background-color: transparent;
+  border: 1px solid var(--primary-gold);
+  color: var(--primary-gold);
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: rgba(212, 175, 55, 0.1);
+  transform: translateY(-3px);
+}
+
+/* 3. Typography */
+h1,
+h2,
+h3 {
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
